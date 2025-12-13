@@ -1,0 +1,148 @@
+/* Основной контейнер */
+.main-container {
+    display: flex;
+    width: 100%;
+    height: 821px;
+    margin: 50px auto;
+    padding: 32px;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    gap: 48px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 1312px;
+}
+
+
+/* Правая часть - приветствие */
+.welcome-section {
+    flex: 1;
+    background: #E4F2FF;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 48px;
+    position: relative;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.welcome-title {
+    font-size: 48px;
+    color: #343A40;
+    font-weight: 500;
+    text-align: left; 
+    line-height: 1.2;
+    margin-bottom: 0;
+}
+
+.highlight {
+    color: #343A40; 
+    position: relative;
+    font-weight: 500; 
+}
+
+.highlight::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #4172F1; 
+}
+
+.welcome-image {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 500px; 
+}
+
+.welcome-img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.welcome-text {
+    display: flex;
+    color: #495057;
+    width: 100%;
+    height: 58px;
+    justify-content: space-between;
+}
+
+.welcome-text a{
+    text-align: left;
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.log_image{
+    align-items: flex-start;
+}
+
+.img_with_logo{
+    margin-top: 24px;
+    height: 36px;
+}
+
+@media (max-width: 768px) {
+    
+    .main-container {
+        flex-direction: column;
+        height: auto;
+        gap: 0px;
+    }
+
+    .welcome-section{
+        width: auto;
+        height: auto;
+    }
+    
+    .welcome-title {
+        font-size: 20px;
+        text-align: center;
+    }
+    
+    .welcome-img {
+        max-width: 200px;
+        margin: 0 auto;
+        height: 200px;
+    }
+
+    .welcome-text{
+        width: 100%;
+    }
+}
+
+@media (max-width: 569px) {
+    .header {
+        padding: 10px 15px;
+    }
+    
+    .main-container {
+        padding: 15px;
+    }
+    
+    .welcome-title {
+        font-size: 18px;
+    }
+    
+    .welcome-text{
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+    }
+    .welcome-img {
+        max-width: 150px;
+    }
+}

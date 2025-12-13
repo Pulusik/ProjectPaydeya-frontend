@@ -1,0 +1,227 @@
+/* Левая часть - авторизация */
+.auth-section {
+    width: 533px;
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 32px;
+}
+.auth-section form{
+    gap: 16px;
+    display: flex;
+    flex-direction: column;
+}
+.auth-title {
+    font-size: 24px;
+    font-weight: 500;
+    color: #2E2E2E;
+    
+}
+
+.required {
+    color: #F14173; 
+}
+
+.input-container input {
+    background: white !important;
+    color: black !important;
+    color-scheme: light !important;
+}
+
+.input-container.floating {
+    position: relative;
+    border: 2px solid #e1e1e1;
+    border-radius: 8px;
+    height: 48px; 
+    background-color: white;
+    
+}
+
+.input-container.floating label {
+    position: absolute;
+    top: 27%; 
+    left: 12px;
+    font-size: 16px;
+    color: #999;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.input-container.floating input {
+    width: 100%;
+    height: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    background: white !important;
+}
+
+.input-container.floating input:focus + label,
+.input-container.floating input:not(:placeholder-shown) + label {
+    top: 3px;
+    font-size: 10px;
+    color: #999; 
+    background: none;
+}
+
+.input-container.floating input:focus,
+.input-container.floating input:not(:placeholder-shown) {
+    padding-bottom: 3px; 
+}
+
+
+.password-container {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 55%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 2;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+
+.password-container input:focus ~ .password-toggle,
+.password-container input:not(:placeholder-shown) ~ .password-toggle {
+    opacity: 1;
+    visibility: visible;
+}
+
+.eye-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.password-link {
+    text-align: right;
+    color: gray;
+}
+
+.password-link a {
+    color: #4172F1;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.password-link a:hover {
+    text-decoration: underline;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #555;
+    font-size: 16px;
+}
+
+.remember-me input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transform: scale(0.8);
+}
+
+.login-btn {
+    width: 100%;
+    padding: 15px;
+    background: #4172F1;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.login-btn:hover {
+    background: #3158d4;
+}
+
+.register-link {
+    text-align: center;
+    color: #555;
+    font-size: 16px;
+}
+
+.register-link a {
+    color: #4172F1;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+.auth-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+}
+
+
+@media (max-width: 768px) {
+    .auth-section {
+        width: 100%;
+        max-width: 400px;
+        margin: auto;
+    }
+    
+    .auth-title {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .password-link {
+        text-align: center;
+    }
+    
+    .header-buttons {
+        gap: 10px;
+    }
+    
+    .btn-register,
+    .btn-login {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 569px) {
+    .auth-section {
+        padding: 20px 15px;
+    }
+    
+    .auth-title {
+        font-size: 22px;
+    }
+    
+    .input-container {
+        margin-bottom: 20px;
+    }
+    
+    .password-link {
+        font-size: 14px;
+    }
+    
+    .logo img {
+        height: 30px;
+    }
+}
+
+
+

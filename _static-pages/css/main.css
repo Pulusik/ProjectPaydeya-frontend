@@ -1,0 +1,106 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Gilroy', sans-serif;
+}
+
+
+body {
+    background: #F1F2F4;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+/* Шапка */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1312px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.logo {
+    width: 43px;
+    height: 43px;
+    background: white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-0.68deg);
+    transition: transform 0.5s ease;
+}
+
+.logo:hover {
+    transform: rotate(360deg);
+}
+
+.header-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-register {
+    padding: 12px 24px;
+    background: white;
+    color: black;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+}
+
+.btn-login {
+    padding: 12px 24px;
+    background: #4172F1;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+}
+
+.btn-register, .btn-login {
+    transition: all 0.3s ease;
+}
+
+.btn-register:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(65, 114, 241, 0.3);
+    background: #f8f9fa;
+}
+
+.btn-login:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(65, 114, 241, 0.4);
+    background: #3158d4;
+}
+        
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('../fonts/Gilroy-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('../fonts/Gilroy-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+

@@ -1,0 +1,288 @@
+.role-container {
+    margin-top: 64px;
+    margin: auto;
+    width: 843px;
+    height: 523px;
+    background: white;
+    border-radius: 12px;
+    padding: 32px 48px 64px 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.role-title {
+    font-size: 24px;
+    font-weight: 500;
+    color: #333;
+    text-align: left;
+}
+
+.roles-grid {
+    display: flex;
+    gap: 24px;
+    width: 747px;
+    height: 366px;
+    margin: 0 auto;
+}
+
+.role-card {
+    width: 362px;
+    height: 366px;
+    border-radius: 12px;
+    padding: 16px 24px 24px 24px; 
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    text-align: center;
+    transition: all 0.3s ease;
+    gap: 8px; 
+    position: relative;
+    overflow: hidden;
+}
+
+.role-card.teacher-card::before {
+    content: "";
+    position: absolute;
+    top: 22px;
+    left: 200px;
+    width: 325px;
+    height: 325px;
+    background: url('../img/svg/role_logo.svg') no-repeat center center;
+    background-size: contain;
+    z-index: 0;
+}
+
+.role-card.teacher-card .role-icon,
+.role-card.teacher-card .role-name,
+.role-card.teacher-card .role-description,
+.role-card.teacher-card .role-button {
+    position: relative;
+    z-index: 1;
+}
+
+.teacher-card {
+    background: #C8B6F9;
+}
+
+.role-card.student-card::before {
+    content: "";
+    position: absolute;
+    top: 22px;
+    right: 200px;
+    width: 325px;
+    height: 325px;
+    background: url('../img/svg/role_logo1.svg') no-repeat center center;
+    color: #94CBFF;
+    background-size: contain;
+    z-index: 0;
+}
+
+.role-card.student-card .role-icon,
+.role-card.student-card .role-name,
+.role-card.student-card .role-description,
+.role-card.student-card .role-button {
+    position: relative;
+    z-index: 1;
+}
+
+.role-button.teacher-btn {
+    background: white;
+    color: black;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    display: flex;
+    width: 314px;
+    height: 43px;
+    gap:4px
+}
+
+.role-button.student-btn {
+    background: white;
+    color: black;
+    font-weight: 500;
+    padding: 12px 24px;
+    border-radius: 8px;
+    display: flex;
+    gap: 4px;
+    width: 314px;
+    height: 43px;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-arrow {
+    width: 19px;
+    height: 19px;
+}
+.student-card {
+    background: #BEDFFF;
+}
+
+.role-icon {
+    width: 192px;
+    height: 192px;
+}
+
+.role-name {
+    font-size: 24px;
+    font-weight: 500;
+    color: black;
+}
+
+.role-description {
+    font-size: 16px;
+    color: #343A40;
+    flex-grow: 1;
+}
+
+.role-button {
+    padding: 12px 32px;
+    background: #4172F1;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    transition: all 0.3s ease;
+    position: relative;
+    top: 0;
+    text-decoration: none;
+}
+
+/* Анимация стрелки при наведении на кнопку */
+.role-button:hover .btn-arrow {
+    transform: rotate(45deg);
+    transition: transform 0.3s ease;
+}
+
+/* Анимация кнопки при наведении */
+.role-button:hover {
+    transform: translateY(2px);
+    transition: transform 0.3s ease;
+}
+
+/* Анимация иконки при наведении на кнопку */
+.role-button:hover ~ .role-icon {
+    animation: floatHover 1.5s ease-in-out infinite;
+}
+
+@keyframes floatHover {
+    0%, 100% { 
+        transform: translateY(0px); 
+    }
+    50% { 
+        transform: translateY(-8px); 
+    }
+}
+
+@media (max-width: 768px) {
+    .role-container{
+        height: auto;
+        margin: 20px auto;
+        width: 100%;
+    }
+
+    .roles-grid {
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        align-items: flex-start;
+        width: 100%;
+        margin: 0;
+    }
+    
+    .role-card {
+        width: 100%;
+        margin-bottom: 20px;
+        padding: 20px;
+    }
+    
+    .role-title{
+        text-align:center;
+    }
+
+    .role-name {
+        font-size: 20px;
+    }
+    
+    .role-description {
+        font-size: 14px;
+    }
+    
+    .icon-wrapper {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .role-button {
+        width: 320px;
+        font-size: 16px;
+    }
+
+    .role-card.student-card::before{
+        left: 50%; /* меняем right на left */
+        transform: translateX(-50%);
+    }
+    .role-card.teacher-card::before{
+        left: 50%; /* меняем right на left */
+        transform: translateX(-50%);
+    }
+
+}
+
+@media (max-width: 590px) {
+    .roles-container {
+        gap: 15px;
+        width: 100%;
+    }
+
+    .roles-grid{
+        align-items: flex-start;
+        width: 100%;
+        margin: 0;
+    }
+
+    .role-card.teacher-card::before{
+        left: 50%; /* меняем right на left */
+        transform: translateX(-50%);
+    }
+
+    .role-card.student-card::before{
+        left: 50%; /* меняем right на left */
+        transform: translateX(-50%);
+    }
+        
+}
+
+@media (max-width: 500px) {
+    .role-card {
+        padding: 10px;
+        width: 350px;
+    }
+    
+    .role-button {
+        width: 220px;
+        font-size: 12px;
+    }
+    
+    .icon-wrapper {
+        width: 100px;
+        height: 100px;
+    }
+
+    .role-card.teacher-card::before{
+        left: 50%; /* меняем right на left */
+        transform: translateX(-50%);
+    }
+
+    .role-card.student-card::before{
+        left: 50%; /* меняем right на left */
+        transform: translateX(-50%);
+    }
+}

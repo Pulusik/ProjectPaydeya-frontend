@@ -1,0 +1,244 @@
+.registration-section {
+    max-width: 533px;
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.registration-title {
+    font-size: 24px;
+    font-weight: 500;
+    color: #2E2E2E;
+}
+
+.registration-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.input-container {
+    position: relative;
+    border: 2px solid #e1e1e1;
+    border-radius: 8px;
+    height: 48px;
+    background-color: white;
+}
+
+.input-container input {
+    background: white !important;
+    color: black !important;
+    color-scheme: light !important;
+}
+
+.input-container.floating {
+    position: relative;
+    border: 2px solid #e1e1e1;
+    border-radius: 8px;
+    height: 48px; 
+    background-color: white;
+    
+}
+
+.input-container.floating label {
+    position: absolute;
+    top: 27%; 
+    left: 12px;
+    font-size: 16px;
+    color: #999;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.input-container.floating input {
+    width: 100%;
+    height: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    background: white !important;
+}
+
+.input-container.floating input:focus + label,
+.input-container.floating input:not(:placeholder-shown) + label {
+    top: 3px;
+    font-size: 10px;
+    color: #999; 
+    background: none;
+}
+
+.input-container.floating input:focus,
+.input-container.floating input:not(:placeholder-shown) {
+    padding-bottom: 3px; 
+}
+
+.required {
+    color: #F14173;
+}
+
+.password-container {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 55%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 2;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+.password-container input:focus ~ .password-toggle,
+.password-container input:not(:placeholder-shown) ~ .password-toggle {
+    opacity: 1;
+    visibility: visible;
+}
+
+.eye-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 16px 0;
+}
+
+.checkbox-yes {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    max-width: 437px;
+}
+
+.checkbox-yes input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.checkbox-yes label {
+    font-size: 14px;
+    line-height: 1.4;
+    color: #555;
+    cursor: pointer;
+}
+
+.but-reg{
+    display: flex;
+    flex-direction: column;
+    gap:12px;
+}
+
+.login-link {
+    text-align: center;
+    color: #555;
+    font-size: 14px;
+}
+
+.login-link a {
+    color: #4172F1;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    background: #4172F1;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.submit-btn:hover {
+    background: #3158d4;
+}
+
+/* Медиа-запросы для страницы регистрации */
+@media (max-width: 768px) {
+    .registration-section {
+        width: 100%;
+        max-width: 400px;
+        padding: 30px 20px;
+        margin: 0 auto;
+    }
+    
+    .registration-title {
+        font-size: 22px;
+        text-align: center;
+    }
+    
+    .role-selection {
+        flex-direction: column;
+    }
+    
+    .checkbox-yes {
+        max-width: 100%;
+    }
+    
+    .checkbox-yes label {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 480px) {
+    .registration-section {
+        padding: 20px 15px;
+    }
+    
+    .registration-title {
+        font-size: 20px;
+    }
+    
+    .input-container {
+        height: 44px;
+    }
+    
+    .input-container input {
+        padding: 10px;
+        font-size: 14px;
+    }
+    
+    .role-option {
+        padding: 10px;
+        font-size: 14px;
+    }
+    
+    .submit-btn {
+        padding: 12px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 360px) {
+    .registration-section {
+        padding: 15px 10px;
+    }
+    
+    .checkbox-yes {
+        gap: 8px;
+    }
+    
+    .checkbox-yes input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .checkbox-yes label {
+        font-size: 10px;
+    }
+}
