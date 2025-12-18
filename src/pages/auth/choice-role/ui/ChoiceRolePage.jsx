@@ -1,3 +1,4 @@
+// ChoiceRolePage.jsx
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { PublicHeader } from "../../../../widgets/public-header";
@@ -26,8 +27,9 @@ export function ChoiceRolePage() {
               style={{ animation: hovered === "teacher" ? "floatHover 1.5s ease-in-out infinite" : "none" }}
             />
 
+            {/* Добавляем параметр role=teacher в URL */}
             <Link
-              to="/registration"
+              to="/registration?role=teacher"
               className="role-button teacher-btn"
               onMouseEnter={() => setHovered("teacher")}
               onMouseLeave={() => setHovered(null)}
@@ -50,8 +52,9 @@ export function ChoiceRolePage() {
               style={{ animation: hovered === "student" ? "floatHover 1.5s ease-in-out infinite" : "none" }}
             />
 
+            {/* Добавляем параметр role=student в URL */}
             <Link
-              to="/registration"
+              to="/registration?role=student"
               className="role-button student-btn"
               onMouseEnter={() => setHovered("student")}
               onMouseLeave={() => setHovered(null)}

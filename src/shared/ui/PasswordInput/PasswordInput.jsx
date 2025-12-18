@@ -1,5 +1,4 @@
-// PasswordInput.jsx
-import { useState } from "react"; // ← ДОБАВЬТЕ ЭТО
+import { useState } from "react";
 
 export function PasswordInput({
   id,

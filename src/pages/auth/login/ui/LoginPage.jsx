@@ -5,6 +5,7 @@ import { PublicHeader } from "../../../../widgets/public-header";
 import { WelcomeBlock } from "../../../../widgets/welcome-block";
 import { FloatingInput } from "../../../../shared/ui/FloatingInput/FloatingInput";
 import { PasswordInput } from "../../../../shared/ui/PasswordInput/PasswordInput";
+import { translateError, validationMessages } from "../../../../utils/translations"; // ← ИМПОРТ
 
 export function LoginPage() {
   const navigate = useNavigate();
@@ -16,8 +17,7 @@ export function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // Используйте прокси /api вместо полного URL
-  const API_BASE = '/api'; // Vite проксирует на https://paydeya-backend.onrender.com/api/v1
+  const API_BASE = '/api';
 
   const handleInputChange = (e) => {
     const { id, value, type, checked } = e.target;
@@ -25,28 +25,29 @@ export function LoginPage() {
       ...prev,
       [id]: type === "checkbox" ? checked : value
     }));
+    if (error) setError("");
   };
 
   const validateForm = () => {
     const { email, password } = formData;
 
     if (!email.trim()) {
-      setError("Введите email");
+      setError(validationMessages.emailRequired);
       return false;
     }
 
     if (!/\S+@\S+\.\S+/.test(email)) {
-      setError("Введите корректный email");
+      setError(validationMessages.emailInvalid);
       return false;
     }
 
     if (!password.trim()) {
-      setError("Введите пароль");
+      setError(validationMessages.passwordRequired);
       return false;
     }
 
     if (password.length < 6) {
-      setError("Пароль должен быть не менее 6 символов");
+      setError(validationMessages.passwordTooShort);
       return false;
     }
 
@@ -55,10 +56,12 @@ export function LoginPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+
     if (!validateForm()) {
       return;
     }
-    setError("");
+
     setIsLoading(true);
 
     try {
@@ -77,7 +80,6 @@ export function LoginPage() {
       const data = await response.json();
 
       if (response.ok) {
-        // Успешный вход
         localStorage.setItem("accessToken", data.accessToken);
         localStorage.setItem("refreshToken", data.refreshToken);
         localStorage.setItem("user", JSON.stringify(data.user));
@@ -88,30 +90,14 @@ export function LoginPage() {
 
         navigate("/");
       } else {
-        // Переводим английские сообщения на русский
-        let errorMessage = data.error || "Ошибка входа";
-
-        const errorTranslations = {
-          "invalid email or password": "Неверный email или пароль",
-          "user not found": "Пользователь не найден",
-          "incorrect password": "Неверный пароль",
-          "email already exists": "Email уже зарегистрирован",
-          "invalid token": "Недействительный токен",
-          "unauthorized": "Не авторизован",
-          "access denied": "Доступ запрещен"
-        };
-
-        // Ищем перевод
-        const translatedError = errorTranslations[errorMessage.toLowerCase()];
-        if (translatedError) {
-          errorMessage = translatedError;
-        }
-
-        setError(errorMessage);
+        // Используем общую функцию перевода
+        const translatedError = translateError(data.error || "Ошибка входа");
+        setError(translatedError);
       }
     } catch (err) {
       console.error("Login error:", err);
-      setError("Ошибка соединения с сервером");
+      const translatedError = translateError(err.message || "Ошибка соединения с сервером");
+      setError(translatedError);
     } finally {
       setIsLoading(false);
     }
@@ -135,12 +121,14 @@ export function LoginPage() {
       const data = await response.json();
 
       if (response.ok) {
-        alert(data.message || "Инструкции отправлены на email");
+        alert("Инструкции по восстановлению пароля отправлены на ваш email");
       } else {
-        alert(data.error || "Ошибка отправки запроса");
+        const translatedError = translateError(data.error || "Ошибка отправки запроса");
+        alert(translatedError);
       }
     } catch (err) {
-      alert("Ошибка соединения с сервером");
+      const translatedError = translateError(err.message || "Ошибка соединения с сервером");
+      alert(translatedError);
     } finally {
       setIsLoading(false);
     }
@@ -160,31 +148,32 @@ export function LoginPage() {
               marginBottom: "15px",
               padding: "10px",
               backgroundColor: "#ffe6e6",
-              borderRadius: "5px"
+              borderRadius: "5px",
+              border: "1px solid #ff4444"
             }}>
-              {error}
+              ⚠ {error}
             </div>
           )}
 
           <form onSubmit={handleSubmit}>
-           <FloatingInput
-               id="email"
-               type="email"
-               label="e-mail"
-               required
-               value={formData.email}
-               onChange={handleInputChange}
-               disabled={isLoading}
-             />
+            <FloatingInput
+              id="email"
+              type="email"
+              label="e-mail"
+              required
+              value={formData.email}
+              onChange={handleInputChange}
+              disabled={isLoading}
+            />
 
-             <PasswordInput
-               id="password"
-               label="Пароль"
-               required
-               value={formData.password}
-               onChange={handleInputChange}
-               disabled={isLoading}
-             />
+            <PasswordInput
+              id="password"
+              label="Пароль"
+              required
+              value={formData.password}
+              onChange={handleInputChange}
+              disabled={isLoading}
+            />
 
             <div className="password-link">
               Забыли пароль?{" "}
@@ -217,16 +206,20 @@ export function LoginPage() {
             </label>
 
             <div className="auth-actions">
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 className="login-btn"
                 disabled={isLoading}
+                style={{
+                  opacity: isLoading ? 0.7 : 1,
+                  cursor: isLoading ? "not-allowed" : "pointer"
+                }}
               >
                 {isLoading ? "Вход..." : "Войти"}
               </button>
 
               <div className="register-link">
-                Ещё нет аккаунта? <Link to="/choice-role">Зарегистрироваться</Link>
+                Ещё нет аккаунта? <Link to="/registration">Зарегистрироваться</Link>
               </div>
             </div>
           </form>

@@ -1,14 +1,13 @@
-// FloatingInput.jsx
 import React from "react";
 
 export function FloatingInput({
-  id, 
-  type = "text", 
-  label, 
+  id,
+  type = "text",
+  label,
   required = false,
-  value = "",           // ← ДОБАВЬТЕ ЭТО
-  onChange = () => {},  // ← И ЭТО
-  disabled = false      // ← И ЭТО
+  value = "",
+  onChange = () => {},
+  disabled = false
 }) {
   return (
     <div className="input-container floating">
