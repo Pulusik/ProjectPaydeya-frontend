@@ -1,0 +1,16 @@
+/* Глобальные стили приложения
+/* ВАЖНО: style.css сюда НЕ импортируем */
+
+/* @import "../../shared/styles/common.css";
+@import "../../shared/styles/components.css";
+
+/* базовый сброс 
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+} */ 

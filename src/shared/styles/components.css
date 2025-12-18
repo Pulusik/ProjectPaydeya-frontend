@@ -1,0 +1,68 @@
+/* ==========================================================================
+   COMPONENTS (Shared UI primitives)
+   Loaded AFTER common.system.css and BEFORE page CSS.
+   IMPORTANT: keep this layer additive; page styles can override.
+   ========================================================================== */
+
+:root {
+  /* Радиусы (единая шкала) */
+  --radius-8: 8px;
+  --radius-12: 12px;
+  --radius-16: 16px;
+
+  /* Контролы */
+  --control-padding-y: 12px;
+  --control-padding-x: 24px;
+}
+
+/* ------------------------------
+   Button
+   ------------------------------ */
+
+/* Base button/link button */
+.btn {
+  display: inline-block; /* safer than inline-flex: меньше шанс сдвинуть верстку */
+  padding: var(--control-padding-y) var(--control-padding-x);
+  border-radius: var(--radius-8);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+/* Variants */
+.btn--surface {
+  background: var(--background-white);
+  color: var(--text-dark);
+}
+
+.btn--primary {
+  background: var(--primary-blue);
+  color: var(--text-light);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-button);
+}
+
+/* ------------------------------
+   Card
+   ------------------------------ */
+
+.card {
+  background: var(--background-white);
+  border-radius: var(--radius-12);
+  box-shadow: var(--shadow-card);
+}
+
+/* ------------------------------
+   Input (base)
+   ------------------------------ */
+
+.input {
+  font: inherit;
+  border: none;
+  outline: none;
+  background: var(--background-white);
+  border-radius: var(--radius-16);
+}

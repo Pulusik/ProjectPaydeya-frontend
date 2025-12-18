@@ -1,0 +1,952 @@
+@font-face {
+    font-family: 'Gilroy';
+    src: url('../fonts/Gilroy-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('../fonts/Gilroy-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+.medium-text {
+    font-family: 'Gilroy', sans-serif;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 100%;
+    letter-spacing: 0%;
+}
+
+.regular-text {
+    font-family: 'Gilroy', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;  /* Horizontal align center */
+}
+
+/* ==========================================================================
+   CSS VARIABLES & UTILITIES
+   ========================================================================== */
+
+/* ========================================================================== 
+   01 - DESIGN TOKENS (CSS VARIABLES)
+   ========================================================================== */
+
+/* ========================================================================== 
+   02 - UTILITIES
+   ========================================================================== */
+
+/* ========================================================================== 
+   03 - BASE
+   ========================================================================== */
+
+body {
+    font-family: var(--font-sans-landing);
+    font-style: normal;
+    font-size: 16px;
+    line-height: var(--lh-12);
+    font-weight: normal;
+    color: black;
+    background: var(--background-light);
+}
+
+/* ========================================================================== 
+   04 - LAYOUT
+   ========================================================================== */
+
+.wrapper{
+    max-width: 1312px;
+    margin: 0 auto;
+}
+
+/* ==========================================================================
+   PART 1 - HEADER
+   ========================================================================== */
+
+.header {
+  /* position: sticky; */ /* фиксация верхней менюшки при скроллинге */
+  top: 0;
+  width: 100%;
+}
+
+.header__wrapper {
+  padding-top: 32px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+}
+
+.header__nav {
+  justify-self: center;
+  margin: 0 auto;
+}
+
+.header__nav-card {
+  background: white;
+  border-radius: 8px;
+}
+
+.header__list {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.header__item {
+  list-style: none;
+}
+
+.header__link {
+  text-decoration: none;
+  color: var(--text-dark);
+  font-weight: 500;
+  padding: 12px 24px;
+  transition: var(--transition);
+  display: block;
+}
+
+.header__link:hover,
+.header__link:focus, 
+.header__link:active {
+  color: var(--primary-blue);
+}
+
+.header__buttons {
+  display: flex;
+  gap: 12px;
+  justify-self: end;
+}
+
+.header__button {
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.header__button--register {
+  color: var(--text-dark);
+  background: white;
+}
+
+.header__button--login {
+  color: white;
+  background: var(--primary-blue);
+}
+
+.header__button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-button);
+}
+
+/* ==========================================================================
+   PART 2 - INTRO
+   ========================================================================== */
+
+.intro {
+  padding: 32px 48px 64px 48px;
+  margin-top: 40px;
+  background-color: var(--background-white);
+  border-radius: 12px;
+  background-image: url(../img/svg/star1.svg), url(../img/svg/star2.svg), url(../img/svg/book.svg), url(../img/svg/biglogo.svg);
+  background-repeat: no-repeat, no-repeat;
+  background-position: bottom 72% right 32%, bottom 33% right 5%, bottom 54% right 5%, bottom 0 right 0;
+  background-size: 35px, 59px, 440px, contain;
+}
+
+.intro__comm {
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--text-gray);
+  margin: 0%;
+}
+
+.intro__header--main {
+  display: flex;
+  align-items: flex-end;
+  margin-top: 32px;
+  margin-bottom: 0;
+  color: var(--text-dark);
+}
+
+.intro__header--sub {
+  margin: 0%;
+  font-size: 80px;
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+.intro__header-text {
+  font-size: 80px;
+  font-weight: 500;
+}
+
+.intro__header-part {
+  font-size: 80px;
+  font-weight: 500;
+}
+
+.intro__header-part--accent {
+  border-bottom: 5px solid var(--primary-blue);
+  padding-bottom: 0px;
+  display: inline-block;
+  line-height: 1;
+}
+
+.intro__icon--big {
+  width: 158px;
+  height: 158px;
+  margin-bottom: -30px;
+}
+
+.intro__icon--small {
+  width: 43px;
+  height: 41px;
+  align-self: flex-start;
+  margin-top: 30px;
+}
+
+.intro__description {
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--text-gray);
+  max-width: 678px;
+  margin-top: 32px;
+  position: relative;
+  z-index: 1;
+}
+
+.intro__features {
+  margin-top: 64px;
+  max-width: 593px;
+  display: flex;
+  gap: 16px;
+}
+
+/* Общие стили для фич-карточек */
+.intro__feature {
+  text-decoration: none;
+    cursor: pointer;
+  flex: 1;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  min-height: 127px;
+  position: relative;
+  padding: 16px 16px 24px 24px;
+  min-width: 293px;
+  border: 1px solid transparent;
+}
+
+.intro__feature-icon {
+  width: 24px;
+  height: 24px;
+  transition: var(--transition);
+}
+
+.intro__feature:hover .intro__feature-icon {
+  transform: rotate(45deg);
+}
+
+/* Модификаторы для карточек */
+.intro__feature--teachers {
+  background: var(--primary-blue);
+  background-image: url(../img/svg/teacher-icon.svg);
+  background-repeat: no-repeat;
+  background-position: bottom 0% right 0%;
+  border: 0;
+  max-width: 284px;
+}
+
+.intro__feature--students {
+  background: var(--primary-dark);
+  background-image: url(../img/svg/student-icon.svg);
+  background-repeat: no-repeat;
+  background-position: bottom 0% right 0%;
+  border: 0;
+  max-width: 284px;
+}
+
+.intro__feature-content {
+  flex: 1;
+}
+
+.intro__feature-title {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0 0 8px 0;
+  color: var(--text-light);
+}
+
+.intro__feature-text {
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.intro__feature-text--light {
+  max-width: 213px;
+  color: var(--text-blue-light);
+}
+
+.intro__feature-text--gray {
+  max-width: 204px;
+  color: var(--text-gray-light);
+}
+
+/* ==========================================================================
+   PART 3 - STUDENTS
+   ========================================================================== */
+
+.students {
+  margin-top: var(--section-gap);
+}
+
+.students__title {
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--primary-dark);
+}
+
+.students__description {
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--text-gray);
+  margin-top: 32px;
+  margin-bottom: 40px;
+}
+
+.students__two-cards {
+    display: flex;
+    gap: var(--card-gap);
+    margin-bottom: 24px;
+    min-height: 228px;
+}
+
+.students__three-cards {
+    display: flex;
+    gap: var(--card-gap);
+    margin-bottom: 48px;
+    min-height: 302px;
+}
+
+/* Общие стили для карточек студентов */
+.students__card {
+    flex: 1;
+    border-radius: 16px;
+    padding-left: 24px;
+    padding-top: 24px;
+    box-shadow: var(--shadow-card);
+    transition: var(--transition);
+}
+
+/* Модификаторы карточек по цветам */
+.students__card--white {
+    background: var(--background-white);
+    background-image: url(../img/svg/students_1.svg), url(../img/svg/patt_1.svg);
+    background-repeat: no-repeat, no-repeat;
+    background-position: bottom 0% right 0%, bottom 100% right 0%;
+}
+
+.students__card--blue {
+    background: var(--accent-blue);
+    background-image: url(../img/svg/students_2.svg), url(../img/svg/patt_2.svg);
+    background-repeat: no-repeat, no-repeat;
+    background-position: bottom 0% right 0%, bottom 100% right 0%;
+}
+
+.students__card--dark {
+    background: var(--primary-dark);
+    background-image: url(../img/svg/students_3.svg), url(../img/svg/patt_3.svg);
+    background-repeat: no-repeat, no-repeat;
+    background-position: bottom 0% right 0%, bottom 100% right 0%;
+}
+
+.students__card--purple {
+    background: var(--accent-purple);
+    background-image: url(../img/svg/students_4.svg), url(../img/svg/patt_4.svg);
+    background-repeat: no-repeat, no-repeat;
+    background-position: bottom 0% right 50%, bottom 100% right 0%;
+}
+
+.students__card--gradient {
+    background: 
+      url(../img/svg/students_5.svg) bottom 50% right 0% no-repeat,
+      var(--gradient-blue);
+    background-size: auto, cover;
+}
+
+/* Заголовки карточек */
+.students__card-title {
+    font-size: 24px;
+    font-weight: 500;
+    margin-top: 0;
+    margin-bottom: 16px;
+    max-width: 208px;
+}
+
+.students__card-title--light {
+    color: var(--text-light);
+    max-width: 311px;
+}
+
+/* Части заголовков */
+.students__card-part--primary {
+    color: #212529;
+}
+
+.students__card-part--light {
+    color: var(--text-light);
+}
+
+.students__card-part--accent {
+    border-bottom: 2px solid var(--primary-blue);
+    padding-bottom: 0px;
+    display: inline-block;
+    line-height: 1;
+}
+
+.students__card-part--accent-light {
+    border-bottom: 2px solid var(--primary-blue);
+    padding-bottom: 0px;
+    display: inline-block;
+    line-height: 1;
+    color: var(--text-light);
+}
+
+.students__card-part--accent-dark {
+    border-bottom: 2px solid #212529;
+    padding-bottom: 0px;
+    display: inline-block;
+    line-height: 1;
+}
+
+/* Текстовые стили */
+.students__card-text {
+    font-size: 18px;
+    margin: 0;
+}
+
+.students__card-text--muted {
+    color: var(--text-muted);
+    max-width: 263px;
+}
+
+.students__card-text--dark {
+    color: #343A40;
+    max-width: 263px;
+}
+
+.students__card-text--light {
+    color: #E9ECEF;
+    max-width: 309px;
+}
+
+/* Кнопка */
+.students__card-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 15px;
+    margin-top: 56px;
+    gap: 4px;
+    background-color: var(--background-white);
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: var(--transition);
+    border: none;
+    cursor: pointer;
+}
+
+.students__button-text {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: black;
+}
+
+.students__button-icon {
+    transition: var(--transition);
+}
+
+.students__card-button:hover .students__button-icon {
+    transform: rotate(45deg);
+}
+
+.students__card-button:hover {
+    background-color: #F8F9FA;
+}
+
+/* ==========================================================================
+   PART 4 - CHOICE
+   ========================================================================== */
+
+.choice {
+  margin-top: var(--section-gap);
+}
+
+.choice__title {
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--primary-dark);
+}
+
+.choice__description {
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--text-gray);
+  margin-top: 32px;
+  margin-bottom: 40px;
+}
+
+.choice__line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px; 
+}
+
+.choice__student {
+  color: var(--text-dark);
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.choice__all {
+  display: flex;
+  color: var(--text-gray);
+  text-decoration: none;
+  align-items: center;
+  gap: 4px;
+}
+
+.choice__all-text {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.choice__all-icon {
+  width: 19px;
+  height: 19px;
+}
+
+.choice__cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Общие стили для карточек выбора */
+.choice__card {
+    flex: 0 0 calc(16.666% - 14px);
+    min-width: 208.5px;
+    height: 86px;
+    padding: 10px 0px 32px 12px;
+    border-radius: 8px;
+    background: var(--background-white);
+    text-decoration: none;
+    color: var(--text-dark);
+    display: flex;
+    box-shadow: var(--shadow-card);
+    background-repeat: no-repeat;
+    background-position: bottom 0% right 0%;
+    position: relative;
+    overflow: hidden;
+}
+
+.choice__card-text {
+    font-size: 18px;
+    font-weight: 400;
+    max-width: 117px;
+}
+
+/* Модификаторы для предметов */
+.choice__card--math {
+    background-image: url(../img/svg/math-1.svg);
+}
+.choice__card--math:hover {
+    background-image: url(../img/svg/math-2.svg);
+}
+
+.choice__card--biology {
+    background-image: url(../img/svg/biology-1.png);
+    background-size: contain;
+}
+.choice__card--biology:hover {
+    background-image: url(../img/svg/biology-2.png);
+    background-size: contain;
+}
+
+.choice__card--history {
+    background-image: url(../img/svg/history-1.svg);
+}
+.choice__card--history:hover {
+    background-image: url(../img/svg/history-2.svg);
+}
+
+.choice__card--social {
+    background-image: url(../img/svg/social-1.svg);
+}
+.choice__card--social:hover {
+    background-image: url(../img/svg/social-2.svg);
+}
+
+.choice__card--chemistry {
+    background-image: url(../img/svg/chemistry-1.svg);
+}
+.choice__card--chemistry:hover {
+    background-image: url(../img/svg/chemistry-2.svg);
+}
+
+.choice__card--informatics {
+    background-image: url(../img/svg/informatics-1.svg);
+}
+.choice__card--informatics:hover {
+    background-image: url(../img/svg/informatics-2.svg);
+}
+
+.choice__card--astronomy {
+    background-image: url(../img/svg/astronomy-1.png);
+     background-size: contain;
+}
+.choice__card--astronomy:hover {
+    background-image: url(../img/svg/astronomy-2.png);
+    background-size: contain;
+}
+
+.choice__card--literature {
+    background-image: url(../img/svg/literature-1.svg);
+}
+.choice__card--literature:hover {
+    background-image: url(../img/svg/literature-2.svg);
+}
+
+.choice__card--english {
+    background-image: url(../img/svg/english-1.svg);
+}
+.choice__card--english:hover {
+    background-image: url(../img/svg/english-2.svg);
+}
+
+.choice__card--russian {
+    background-image: url(../img/svg/russian-1.svg);
+}
+.choice__card--russian:hover {
+    background-image: url(../img/svg/russian-2.svg);
+}
+
+.choice__card--geography {
+    background-image: url(../img/svg/geography-1.svg);
+}
+.choice__card--geography:hover {
+    background-image: url(../img/svg/geography-2.svg);
+}
+
+.choice__card--physics {
+    background-image: url(../img/svg/physics-1.svg);
+}
+.choice__card--physics:hover {
+    background-image: url(../img/svg/physics-2.svg);
+}
+
+/* ==========================================================================
+   PART 5 - TEACHERS
+   ========================================================================== */
+
+.teachers {
+  margin-top: var(--section-gap);
+}
+
+.teachers__title {
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--primary-dark);
+}
+
+.teachers__description {
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--text-gray);
+  margin-top: 32px;
+  margin-bottom: 40px;
+}
+
+.teachers__grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--card-gap);
+}
+
+/* Общие стили для карточек преподавателей */
+.teachers__card {
+    height: 236px;
+    padding: 32px 0px 0px 24px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: var(--transition);
+    box-shadow: var(--shadow-card);
+    background-repeat: no-repeat;
+    background-position: bottom 0% right 0%;
+}
+
+/* Конкретные карточки */
+.teachers__card--bg-1 {
+    background: var(--background-white);
+    background-image: url(../img/svg/teachers_1.svg), url(../img/svg/patt_5.svg);
+    background-repeat: no-repeat, no-repeat;
+    background-position: bottom 0% right 0%, bottom 100% right 0%;
+}
+
+.teachers__card--bg-2 {
+    background-color: var(--accent-blue);
+    background-image: url(../img/svg/teachers_2.svg), url(../img/svg/patt_6.svg);
+    background-repeat: no-repeat, no-repeat;
+    background-position: bottom 0% right 0%, bottom 100% right 0%;
+}
+
+.teachers__card--bg-3 {
+    background-color: var(--accent-purple);
+    background-image: url(../img/svg/teachers_3.svg), url(../img/svg/patt_7.svg);
+    background-repeat: no-repeat, no-repeat;
+    background-position: bottom 0% right 0%, bottom 100% right 0%;
+}
+
+.teachers__card--bg-4 {
+    margin-left: auto;
+    background: 
+    url(../img/svg/teachers_4.svg) top 18px right 37px / auto calc(100% - 36px) no-repeat,
+    var(--gradient-blue);
+}
+
+/* Модификаторы размеров карточек */
+.teachers__card--wide {
+    width: 692px;
+}
+
+.teachers__card--narrow {
+    width: 595px;
+}
+
+/* Заголовки карточек */
+.teachers__card-title {
+  font-size: 24px;
+  font-weight: 500;
+  color: #212529;
+  max-width: 248px;
+}
+
+.teachers__card-title--light {
+  color: #F8F9FA;
+  max-width: 312px;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+/* Части заголовков */
+.teachers__card-part--primary {
+    color: inherit;
+}
+
+.teachers__card-part--accent-blue {
+    border-bottom: 2px solid var(--primary-blue);
+    padding-bottom: 0px;
+    display: inline-block;
+    line-height: 1;
+}
+
+.teachers__card-part--accent-dark {
+    border-bottom: 2px solid #343A40;
+    padding-bottom: 0px;
+    display: inline-block;
+    line-height: 1;
+}
+
+/* Текстовые стили */
+.teachers__card-text {
+  font-size: 18px;
+  font-weight: 400;
+  max-width: 263px;
+  margin-top: 16px;
+}
+
+.teachers__card-text--muted {
+  color: var(--text-muted);
+}
+
+.teachers__card-text--dark {
+  color: #343A40;
+}
+
+.teachers__card-text--gray {
+  color: #495057;
+}
+
+.teachers__card-text--light {
+  color: #E9ECEF;
+}
+
+/* Кнопка */
+.teachers__card-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 24px;
+    gap: 4px;
+    background-color: var(--background-white);
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: var(--transition);
+    border: none;
+    cursor: pointer;
+}
+
+.teachers__button-text {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: black;
+}
+
+.teachers__button-icon {
+    transition: var(--transition);
+}
+
+.teachers__card-button:hover .teachers__button-icon {
+  transform: rotate(45deg);
+}
+
+.teachers__card-button:hover {
+  background-color: #F8F9FA;
+}
+
+/* ==========================================================================
+   PART 6 - FOOTER
+   ========================================================================== */
+
+.footer {
+  height: 427px;
+}
+
+.footer__container {
+  margin: var(--section-gap) 0px 85px 0px;
+  padding: 20px 32px 36px 32px;
+  background-color: var(--background-white);
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  gap: 64px;
+}
+
+.footer__left {
+  flex: 1;
+  display: flex;
+  gap: 48px;
+  justify-content: space-between;
+  border-right: 1px solid #CED4DA;
+  padding-right: 64px;
+}
+
+.footer__right {
+  flex: 1;
+}
+
+.footer__nav {
+  flex: 0.2;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.footer__column {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Кастомные отступы для навигации */
+.footer__brand {
+  margin-bottom: 16px;
+}
+
+.footer__nav-title {
+  margin-bottom: 12px;
+}
+
+.footer__nav-link {
+  margin-bottom: 8px;
+}
+
+.footer__nav-link:last-child {
+  margin-bottom: 0;
+}
+
+/* Ссылки футера */
+.footer__nav-link,
+.footer__link {
+  color: var(--text-gray-medium);
+  font-size: 16px;
+  font-weight: 400;
+  text-decoration: none;
+  transition: var(--transition);
+  position: relative;
+}
+
+.footer__nav-link:hover,
+.footer__link:hover {
+  color: var(--text-muted);
+}
+
+.footer__nav-link:hover::after,
+.footer__link:hover::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--text-muted);
+  animation: underline 0.3s ease;
+}
+
+@keyframes underline {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.footer__nav-title,
+.footer__column-title {
+  color: var(--text-dark);
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  margin-bottom: 12px;
+}
+
+.footer__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer__cookies {
+  margin-top: 219px;
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.footer__cookies-text {
+  margin: 0;
+}
