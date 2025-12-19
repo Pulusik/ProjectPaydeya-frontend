@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 export function PublicHeader() {
@@ -32,30 +32,11 @@ export function PublicHeader() {
 
   // Функция для очистки localStorage при клике на кнопки авторизации
   const clearAuthAndNavigate = (path) => {
-    // Полностью очищаем всё связанное с авторизацией
     localStorage.removeItem('user');
     localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken'); // если есть
-
-    // Переходим на нужную страницу
+    localStorage.removeItem('refreshToken');
     window.location.href = path;
   };
-
-  // Страницы где нужно скрыть кнопки "Регистрация" и "Вход"
-  const hideAuthButtonsPages = [
-    '/login',
-    '/registration',
-    '/choice-role',
-    '/teacher/dashboard',
-    '/student/dashboard',
-    '/materials',
-    '/profile'
-  ];
-
-  // Определяем нужно ли скрывать кнопки
-  const shouldHideAuthButtons = hideAuthButtonsPages.some(path =>
-    location.pathname.startsWith(path)
-  );
 
   // Если загружается - показываем пустой хедер
   if (isLoading) {
@@ -69,37 +50,178 @@ export function PublicHeader() {
     );
   }
 
-  // Определяем какие кнопки показывать для текущей страницы
-  const getVisibleButtons = () => {
-    const path = location.pathname;
+  // === ОПРЕДЕЛЯЕМ ТИП СТРАНИЦЫ ===
 
-    if (user && (path.startsWith('/teacher/') || path.startsWith('/student/'))) {
-      return 'user-info'; // Показываем информацию пользователя
+  // Страницы где должен показываться пользователь (дашборды, редактор)
+  const userPages = [
+    '/teacher/dashboard',
+    '/student/dashboard',
+    '/materials/new',
+    '/materials/', // все материалы (просмотр, редактирование)
+    '/profile'
+  ];
+
+  const isUserPage = userPages.some(page => location.pathname.startsWith(page));
+
+  // Страницы авторизации
+  const isLoginPage = location.pathname === '/login';
+  const isChoiceRolePage = location.pathname === '/choice-role';
+  const isRegistrationPage = location.pathname === '/registration';
+
+  // 1. Если это страница пользователя (дашборд, редактор и т.д.)
+  if (isUserPage) {
+    // Должен быть авторизованный пользователь
+    if (!user) {
+      // Если пользователь не авторизован, но на странице где нужна авторизация
+      // Можно перенаправить или показать сообщение
+      console.warn('User not authenticated on protected page:', location.pathname);
+      // window.location.href = '/login'; // раскомментируйте если нужно перенаправлять
     }
 
-    switch(path) {
-      case '/login':
-        return 'register-only'; // Только "Регистрация"
-      case '/choice-role':
-      case '/registration':
-        return 'login-only';    // Только "Вход"
-      default:
-        return 'both';          // Обе кнопки
-    }
-  };
-
-  const visibleButtons = getVisibleButtons();
-
-  // Рендерим хедер в зависимости от visibleButtons
-  if (visibleButtons === 'user-info') {
     return (
       <div className="header">
-        <div className="logo"><img src="/img/svg/logo.svg" alt="Logo" /></div>
-        {/* Информация пользователя */}
+        <a href="/"><div className="logo">
+          <img src="/img/svg/logo.svg" alt="Logo" />
+        </div></a>
+
+        {user ? (
+          // Пользователь авторизован - показываем информацию
+          <div className="user-info" style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '15px'
+          }}>
+            <div style={{ textAlign: 'right' }}>
+              <div style={{
+                fontWeight: '500',
+                fontSize: '0.95rem',
+                color: '#333'
+              }}>
+                {user.fullName || 'Пользователь'}
+              </div>
+              <div style={{
+                fontSize: '0.8rem',
+                color: '#666',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '5px'
+              }}>
+                <span>{user.email}</span>
+                <span style={{
+                  background: user.role === 'teacher' ? '#4CAF50' : '#2196F3',
+                  color: 'white',
+                  padding: '2px 6px',
+                  borderRadius: '8px',
+                  fontSize: '0.7rem'
+                }}>
+                  {user.role === 'teacher' ? 'Преподаватель' : 'Студент'}
+                </span>
+              </div>
+            </div>
+
+            <button
+              onClick={() => {
+                localStorage.clear();
+                window.location.href = '/';
+              }}
+              style={{
+                padding: '6px 12px',
+                background: '#f5f5f5',
+                color: '#666',
+                border: '1px solid #ddd',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                fontSize: '0.85rem'
+              }}
+            >
+              Выйти
+            </button>
+          </div>
+        ) : (
+          // Пользователь не авторизован, но на странице где нужна авторизация
+          // Пустой блок для выравнивания
+          <div style={{ width: '150px' }}></div>
+        )}
       </div>
     );
   }
 
+  // 2. Страница ВХОДА (/login) - показываем только "Регистрация"
+  if (isLoginPage) {
+    return (
+      <div className="header">
+        <a href="/"><div className="logo">
+          <img src="/img/svg/logo.svg" alt="Logo" />
+        </div></a>
+
+        <div className="header-buttons">
+          {/* Только кнопка Регистрация */}
+          <a
+            href="/choice-role"
+            className="btn-register"
+            onClick={(e) => {
+              e.preventDefault();
+              clearAuthAndNavigate('/choice-role');
+            }}
+          >
+            Регистрация
+          </a>
+        </div>
+      </div>
+    );
+  }
+
+  // 3. Страница ВЫБОРА РОЛИ (/choice-role) - показываем только "Вход"
+  if (isChoiceRolePage) {
+    return (
+      <div className="header">
+        <a href="/"><div className="logo">
+          <img src="/img/svg/logo.svg" alt="Logo" />
+        </div></a>
+
+        <div className="header-buttons">
+          {/* Только кнопка Вход */}
+          <a
+            href="/login"
+            className="btn-login"
+            onClick={(e) => {
+              e.preventDefault();
+              clearAuthAndNavigate('/login');
+            }}
+          >
+            Вход
+          </a>
+        </div>
+      </div>
+    );
+  }
+
+  // 4. Страница РЕГИСТРАЦИИ (/registration) - показываем только "Вход"
+  if (isRegistrationPage) {
+    return (
+      <div className="header">
+        <a href="/"><div className="logo">
+          <img src="/img/svg/logo.svg" alt="Logo" />
+        </div></a>
+
+        <div className="header-buttons">
+          {/* Только кнопка Вход */}
+          <a
+            href="/login"
+            className="btn-login"
+            onClick={(e) => {
+              e.preventDefault();
+              clearAuthAndNavigate('/login');
+            }}
+          >
+            Вход
+          </a>
+        </div>
+      </div>
+    );
+  }
+
+  // 5. Стандартный хедер с обеими кнопками (главная страница и другие)
   return (
     <div className="header">
       <a href="/"><div className="logo">
@@ -107,28 +229,29 @@ export function PublicHeader() {
       </div></a>
 
       <div className="header-buttons">
-        {visibleButtons === 'both' && (
-          <>
-            <a href="/choice-role" className="btn-register" onClick={(e) => { e.preventDefault(); clearAuthAndNavigate('/choice-role'); }}>
-              Регистрация
-            </a>
-            <a href="/login" className="btn-login" onClick={(e) => { e.preventDefault(); clearAuthAndNavigate('/login'); }}>
-              Вход
-            </a>
-          </>
-        )}
+        {/* Кнопка Регистрация */}
+        <a
+          href="/choice-role"
+          className="btn-register"
+          onClick={(e) => {
+            e.preventDefault();
+            clearAuthAndNavigate('/choice-role');
+          }}
+        >
+          Регистрация
+        </a>
 
-        {visibleButtons === 'register-only' && (
-          <a href="/choice-role" className="btn-register" onClick={(e) => { e.preventDefault(); clearAuthAndNavigate('/choice-role'); }}>
-            Регистрация
-          </a>
-        )}
-
-        {visibleButtons === 'login-only' && (
-          <a href="/login" className="btn-login" onClick={(e) => { e.preventDefault(); clearAuthAndNavigate('/login'); }}>
-            Вход
-          </a>
-        )}
+        {/* Кнопка Вход */}
+        <a
+          href="/login"
+          className="btn-login"
+          onClick={(e) => {
+            e.preventDefault();
+            clearAuthAndNavigate('/login');
+          }}
+        >
+          Вход
+        </a>
       </div>
     </div>
   );
