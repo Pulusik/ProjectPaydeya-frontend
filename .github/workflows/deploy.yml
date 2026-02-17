@@ -1,4 +1,4 @@
-name: Deploy
+name: Frontend CI/CD
 
 on:
   push:
@@ -11,15 +11,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Build Docker
-        run: |
-          docker build -t paydeya-backend .
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
 
       - name: Deploy to Web VM
         run: |
-          ssh pulusik@192.168.2.3 "
-            cd /opt/paydeya &&
-            git pull &&
-            docker-compose down &&
-            docker-compose up -d --build
-          "
+          rsync -avz --delete dist/ pulusik@192.168.2.3:/opt/paydeya/frontend/dist/
