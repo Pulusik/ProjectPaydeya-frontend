@@ -19,7 +19,7 @@ function App() {
             <>
               <PublicHeader />
               <div className="main-content">
-                <h1>Добро пожаловать в BDSM</h1>
+                <h1>Добро пожаловать в Пайдейю</h1>
                 <p>Образовательная платформа нового поколения</p>
                 <div className="action-buttons">
                   <button
